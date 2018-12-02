@@ -1,5 +1,6 @@
 @import './reset.css';
 @import './fontFace.css';
+@import './flags.css';
 
 body {
   font-family: Lato;
