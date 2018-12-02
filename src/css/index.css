@@ -1,0 +1,7 @@
+@import './reset.css';
+@import './fontFace.css';
+
+body {
+  font-family: Lato;
+  font-size: 15px;
+}

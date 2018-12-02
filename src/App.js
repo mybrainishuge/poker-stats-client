@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import { Col, Row } from 'react-flexbox-grid';
 
-class App extends Component {
+export class App extends Component {
+  constructor() {
+    super();
+    this.state = { players: [] };
+  }
+
+  componentDidMount = async () => {
+    const { data } = await axios.get('http://localhost:3333/players');
+    this.setState({ players: data });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        {this.state.players.map(({ avatar, country, first, id, last, winnings }) => (
+          <Row key={id}>
+            <Col xs={3}>
+              <img alt={`${first} ${last}}`} src={avatar} />
+            </Col>
+            <Col xs={3}>
+              {first} {last}
+            </Col>
+            <Col xs={3}>{winnings}</Col>
+            <Col xs={3}>{country}</Col>
+          </Row>
+        ))}
       </div>
     );
   }
 }
-
-export default App;
