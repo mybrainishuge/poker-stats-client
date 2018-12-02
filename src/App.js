@@ -16,6 +16,11 @@ export class App extends Component {
   render() {
     return (
       <div>
+        <Row>
+          <Col xs={6}>Player</Col>
+          <Col xs={3}>Winnings</Col>
+          <Col xs={3}>Country</Col>
+        </Row>
         {this.state.players.map(({ avatar, country, first, id, last, winnings }) => (
           <Row key={id}>
             <Col xs={3}>
