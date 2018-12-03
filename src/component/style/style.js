@@ -96,3 +96,26 @@ export const Link = styled(RouterLink)`
 export const BackButton = styled(Col)`
   padding-bottom: 1em;
 `;
+
+export const Button = styled.button`
+  background-color: ${color.black};
+  border-radius: ${border.radius};
+  border: ${border.black};
+  box-sizing: border-box;
+  color: ${color.white};
+  font-size: ${fontSize.secondary};
+  height: 44px;
+  margin: 0.5em 0;
+  padding: 0.5em;
+  text-transform: uppercase;
+  width: 100%;
+
+  &:hover {
+    background-color: ${color.white};
+    color: ${color.black};
+  }
+`;
+
+export const Form = styled.form`
+  padding: 1em 0;
+`;

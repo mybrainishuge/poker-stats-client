@@ -2,27 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
+import { enableAddPlayer, clearPlayer, setPlayer } from '../../common/action/creator.js';
 import { Input, SearchItem, SearchItemsContainer } from '..';
 
 const mapStateToProps = ({ players }) => ({ players });
 
-const getPlayer = (players, pid) => players.filter(({ id }) => id === +pid)[0];
+const mapDispatchToProps = dispatch => ({
+  handleAddPlayer: () => dispatch(enableAddPlayer()),
+  handleClearPlayer: () => dispatch(clearPlayer()),
+  handleSetPlayer: player => dispatch(setPlayer(player)),
+});
 
+const getPlayer = (players, pid) => players.filter(({ id }) => id === +pid)[0];
 class PlayerSearchBase extends Component {
   constructor() {
     super();
-    this.state = {
-      list: [],
-      player: null,
-      value: '',
-    };
+    this.state = { list: [], value: '' };
   }
 
   handleChange = e => {
     const { players } = this.props;
     const { value } = e.target;
 
-    const list = value
+    let list = value
       ? players
           .filter(({ first, last }) =>
             `${first} ${last}`.toLowerCase().includes(value.toLowerCase())
@@ -30,28 +32,42 @@ class PlayerSearchBase extends Component {
           .slice(0, 10)
       : [];
 
-    this.setState({ list, player: null, value });
+    if (!list.length) {
+      list = [{ id: 0, first: 'Add', last: 'user...' }];
+    }
+
+    this.setState({ list, value });
+    this.props.handleClearPlayer();
   };
 
   handlePlayerClick = pid => {
-    const { players } = this.props;
-    const player = getPlayer(players, pid);
-    this.setState({ list: [], player, value: `${player.first} ${player.last}` });
+    if (!pid) {
+      // display add new player form
+      this.props.handleAddPlayer();
+    } else {
+      // display update player winnings form
+      const player = getPlayer(this.props.players, pid);
+      this.setState({ list: [], value: `${player.first} ${player.last}` });
+      this.props.handleSetPlayer(player);
+    }
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     const { players } = this.props;
     const { pid } = queryString.parse(this.props.location.search);
     if (pid) {
       const player = getPlayer(players, pid);
       if (player) {
-        this.setState({ player, value: `${player.first} ${player.last}` });
+        this.setState({ value: `${player.first} ${player.last}` });
+        this.props.handleSetPlayer(player);
       }
     }
-  }
+  };
+
+  componentWillUnmount = () => this.props.handleClearPlayer();
 
   render() {
-    const { list, player, value } = this.state;
+    const { list } = this.state;
 
     return (
       <>
@@ -68,11 +84,14 @@ class PlayerSearchBase extends Component {
             </SearchItem>
           ))}
         </SearchItemsContainer>
-        {!player && value && !list.length && 'add new player?'}
-        {player && <div>edit player</div>}
       </>
     );
   }
 }
 
-export const PlayerSearch = withRouter(connect(mapStateToProps)(PlayerSearchBase));
+export const PlayerSearch = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PlayerSearchBase)
+);

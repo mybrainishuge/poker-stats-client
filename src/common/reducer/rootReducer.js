@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
-import { players } from '../reducer/players.js';
+import { addPlayer } from './addPlayer.js';
+import { player } from './player.js';
+import { players } from './players.js';
 
-export const rootReducer = combineReducers({ players });
+export const rootReducer = combineReducers({ addPlayer, player, players });

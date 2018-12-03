@@ -1,8 +1,8 @@
-import { UPDATE_PLAYERS } from '../action/type';
+import { UPDATE } from '../action/type';
 
 export const players = (state = [], action) => {
   switch (action.type) {
-    case UPDATE_PLAYERS:
+    case UPDATE.PLAYERS:
       return action.value;
     default:
       return state;

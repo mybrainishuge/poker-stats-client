@@ -1,2 +1,2 @@
 export { Earnings } from './Earnings.js';
-export { EditPlayers } from './EditPlayers.js';
+export { EditPlayer } from './EditPlayer.js';
