@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { getPlayers } from './common/action/creator.js';
 import { Container, EarningsTable, PageHeading } from './component';
 
-export class App extends Component {
-  constructor() {
-    super();
-    this.state = { players: [] };
-  }
+const mapDispatchToProps = dispatch => ({
+  handleGetPlayers: () => dispatch(getPlayers()),
+});
 
-  componentDidMount = async () => {
-    const { data } = await axios.get('http://localhost:3333/players');
-    this.setState({ players: data });
-  };
+export class AppBase extends Component {
+  componentDidMount = () => this.props.handleGetPlayers();
 
   render() {
     return (
       <Container>
         <PageHeading>All-Time Tournament Earnings</PageHeading>
-        <EarningsTable players={this.state.players} />
+        <EarningsTable />
       </Container>
     );
   }
 }
+
+export const App = withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(AppBase)
+);

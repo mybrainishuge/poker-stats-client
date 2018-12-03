@@ -1,4 +1,4 @@
-export { border, color, fontFamily, fontSize, fontWeight } from './primitive.js';
+export { border, color, fontFamily, fontSize, fontWeight } from './style/primitive.js';
 export {
   Avatar,
   ColMiddle,
@@ -9,7 +9,7 @@ export {
   Text,
   TitlePrimary,
   TitleSecondary,
-} from './style.js';
+} from './style/style.js';
 export { ColCountry } from './presentation/ColCountry.js';
 export { ColPlayer } from './presentation/ColPlayer.js';
 export { EarningsTable } from './presentation/EarningsTable.js';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Col, Row } from 'react-flexbox-grid';
-import { border, color, fontSize, fontWeight } from '.';
+import { border, color, fontSize, fontWeight } from '..';
 
 export const ColMiddle = styled(Col)`
   align-items: center;

@@ -1,9 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Col } from 'react-flexbox-grid';
 import MediaQuery from 'react-responsive';
 import { ColCountry, ColPlayer, TableHeading, TableRowData } from '..';
 
-export const EarningsTable = ({ players }) => (
+const mapStateToProps = ({ players }) => ({ players });
+
+export const EarningsTableBase = ({ players }) => (
   <>
     <TableHeading />
     {players.map(({ alpha2code, avatar, country, first, id, last, winnings }, i) => (
@@ -19,3 +23,5 @@ export const EarningsTable = ({ players }) => (
     ))}
   </>
 );
+
+export const EarningsTable = withRouter(connect(mapStateToProps)(EarningsTableBase));
