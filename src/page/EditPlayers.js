@@ -1,8 +1,10 @@
 import React from 'react';
-import { PageHeading } from '../component';
+import { BackToStats, PageHeading, PlayerSearch } from '../component';
 
 export const EditPlayers = () => (
   <>
     <PageHeading>Add / Modify Players</PageHeading>
+    <BackToStats />
+    <PlayerSearch />
   </>
 );
