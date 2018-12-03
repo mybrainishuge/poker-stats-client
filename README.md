@@ -1,5 +1,14 @@
 # Poker Stats Client
 
+### `Setup`
+
+1. Run Poker Stats Server
+2. Install dependences
+
+```sh
+$ npm install
+```
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
@@ -20,3 +29,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
+
+### To Do
+
+- Add ability to upload avatars
+- Add country dropdown when adding new player
+- Display message upon successful or failed form submission
+- Write tests
