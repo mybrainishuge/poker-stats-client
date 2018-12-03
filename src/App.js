@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import { getPlayers } from './common/action/creator.js';
-import { Container, EarningsTable, PageHeading } from './component';
+import { Container } from './component';
+import { Earnings, EditPlayers } from './page';
 
 const mapDispatchToProps = dispatch => ({
   handleGetPlayers: () => dispatch(getPlayers()),
@@ -14,8 +15,8 @@ export class AppBase extends Component {
   render() {
     return (
       <Container>
-        <PageHeading>All-Time Tournament Earnings</PageHeading>
-        <EarningsTable />
+        <Route path="/" exact={true} component={Earnings} />
+        <Route path="/edit" component={EditPlayers} />
       </Container>
     );
   }
