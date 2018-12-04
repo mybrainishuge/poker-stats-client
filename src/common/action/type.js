@@ -10,6 +10,7 @@ export const CLEAR = {
 };
 
 export const UPDATE = {
+  COUNTRIES: 'UPDATE_COUNTRIES',
   PLAYER: 'UPDATE_PLAYER',
   PLAYERS: 'UPDATE_PLAYERS',
 };

@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { ADD, CLEAR, UPDATE } from './type';
 
+const updateCountries = value => ({ type: UPDATE.COUNTRIES, value });
 const updatePlayers = value => ({ type: UPDATE.PLAYERS, value });
+
+export const getCountries = () => async dispatch => {
+  const { data } = await axios.get('http://localhost:3333/countries');
+  dispatch(updateCountries(data));
+};
 
 export const getPlayers = () => async dispatch => {
   const { data } = await axios.get('http://localhost:3333/players');

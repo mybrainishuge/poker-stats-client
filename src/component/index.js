@@ -11,6 +11,7 @@ export {
   Link,
   SearchItem,
   SearchItemsContainer,
+  Spacer,
   TableRowHeading,
   TableRowData,
   Text,

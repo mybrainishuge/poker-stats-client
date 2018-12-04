@@ -2,22 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-import { enableAddPlayer, clearPlayer, setPlayer } from '../../common/action/creator.js';
+import {
+  enableAddPlayer,
+  clearAddPlayer,
+  clearPlayer,
+  setPlayer,
+} from '../../common/action/creator.js';
 import { Input, SearchItem, SearchItemsContainer } from '..';
 
 const mapStateToProps = ({ players }) => ({ players });
 
 const mapDispatchToProps = dispatch => ({
   handleAddPlayer: () => dispatch(enableAddPlayer()),
+  handleClearAddPlayer: () => dispatch(clearAddPlayer()),
   handleClearPlayer: () => dispatch(clearPlayer()),
   handleSetPlayer: player => dispatch(setPlayer(player)),
 });
 
 const getPlayer = (players, pid) => players.filter(({ id }) => id === +pid)[0];
+
 class PlayerSearchBase extends Component {
   constructor() {
     super();
-    this.state = { list: [], value: '' };
+    this.state = { list: [{ id: 0, first: 'Add', last: 'user...' }], value: '' };
   }
 
   handleChange = e => {
@@ -37,15 +44,14 @@ class PlayerSearchBase extends Component {
     }
 
     this.setState({ list, value });
+    this.props.handleClearAddPlayer();
     this.props.handleClearPlayer();
   };
 
-  handlePlayerClick = pid => {
+  handleItemClick = pid => {
     if (!pid) {
-      // display add new player form
       this.props.handleAddPlayer();
     } else {
-      // display update player winnings form
       const player = getPlayer(this.props.players, pid);
       this.setState({ list: [], value: `${player.first} ${player.last}` });
       this.props.handleSetPlayer(player);
@@ -58,7 +64,7 @@ class PlayerSearchBase extends Component {
     if (pid) {
       const player = getPlayer(players, pid);
       if (player) {
-        this.setState({ value: `${player.first} ${player.last}` });
+        this.setState({ list: [], value: `${player.first} ${player.last}` });
         this.props.handleSetPlayer(player);
       }
     }
@@ -79,7 +85,7 @@ class PlayerSearchBase extends Component {
         />
         <SearchItemsContainer hide={!list.length}>
           {list.map(({ id, first, last }) => (
-            <SearchItem key={id} pid={id} onClick={this.handlePlayerClick.bind(null, id)}>
+            <SearchItem key={id} onClick={this.handleItemClick.bind(null, id)}>
               {first} {last}
             </SearchItem>
           ))}

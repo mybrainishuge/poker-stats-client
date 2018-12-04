@@ -105,7 +105,7 @@ export const Button = styled.button`
   color: ${color.white};
   font-size: ${fontSize.secondary};
   height: 44px;
-  margin: 0.5em 0;
+  /* margin: 0.5em 0; */
   padding: 0.5em;
   text-transform: uppercase;
   width: 100%;
@@ -118,4 +118,9 @@ export const Button = styled.button`
 
 export const Form = styled.form`
   padding: 1em 0;
+`;
+
+export const Spacer = styled.div`
+  height: ${({ height }) => height};
+  width: 100%;
 `;

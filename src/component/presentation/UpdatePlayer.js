@@ -19,6 +19,7 @@ export class UpdatePlayerBase extends Component {
 
   handleChange = e => {
     const { value } = e.target;
+    // need number validation
     this.setState({ value });
   };
 
@@ -33,6 +34,7 @@ export class UpdatePlayerBase extends Component {
 
   render() {
     const { addPlayer, player } = this.props;
+
     return (
       player &&
       !addPlayer && (
