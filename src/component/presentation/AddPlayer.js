@@ -5,7 +5,12 @@ import { Col, Row } from 'react-flexbox-grid';
 import { addPlayer, clearAddPlayer, getCountries } from '../../common/action/creator.js';
 import { Button, Form, Input, SearchItem, SearchItemsContainer } from '..';
 
-const mapStateToProps = ({ addPlayer, countries, player }) => ({ addPlayer, countries, player });
+const mapStateToProps = ({ addPlayer, countries, message, player }) => ({
+  addPlayer,
+  countries,
+  message,
+  player,
+});
 
 const mapDispatchToProps = dispatch => ({
   handleAddPlayer: (id, value) => dispatch(addPlayer(id, value)),
@@ -59,7 +64,16 @@ export class AddPlayerBase extends Component {
     }
   };
 
-  componentWillUnmount = () => this.props.handleClearAddPlayer();
+  componentDidUpdate = prevProps => {
+    const { message } = this.props;
+    if (message && message !== prevProps.message) {
+      this.setState({ country: '', countryName: '', first: '', last: '', list: [], winnings: '' });
+    }
+  };
+
+  componentWillUnmount = () => {
+    this.props.handleClearAddPlayer();
+  };
 
   render() {
     const { addPlayer, player } = this.props;

@@ -12,8 +12,8 @@ export {
   SearchItem,
   SearchItemsContainer,
   Spacer,
-  TableRowHeading,
   TableRowData,
+  TableRowHeading,
   Text,
   TitlePrimary,
   TitleSecondary,
@@ -23,6 +23,7 @@ export { BackToStats } from './presentation/BackToStats.js';
 export { ColCountry } from './presentation/ColCountry.js';
 export { ColPlayer } from './presentation/ColPlayer.js';
 export { EarningsTable } from './presentation/EarningsTable.js';
+export { Message } from './presentation/Message.js';
 export { PageHeading } from './presentation/PageHeading.js';
 export { PlayerSearch } from './presentation/PlayerSearch.js';
 export { TableHeading } from './presentation/TableHeading.js';

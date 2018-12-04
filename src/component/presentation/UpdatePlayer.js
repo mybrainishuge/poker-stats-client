@@ -5,7 +5,7 @@ import { Col, Row } from 'react-flexbox-grid';
 import { updatePlayer } from '../../common/action/creator.js';
 import { Button, Form, Input } from '..';
 
-const mapStateToProps = ({ addPlayer, player }) => ({ addPlayer, player });
+const mapStateToProps = ({ addPlayer, message, player }) => ({ addPlayer, message, player });
 
 const mapDispatchToProps = dispatch => ({
   handleUpdatePlayer: (id, value) => dispatch(updatePlayer(id, value)),
@@ -29,6 +29,13 @@ export class UpdatePlayerBase extends Component {
 
     if (value) {
       this.props.handleUpdatePlayer(this.props.player.id, value);
+    }
+  };
+
+  componentDidUpdate = prevProps => {
+    const { message } = this.props;
+    if (message && message !== prevProps.message) {
+      this.setState({ value: '' });
     }
   };
 
